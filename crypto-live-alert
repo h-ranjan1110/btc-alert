@@ -1,0 +1,88 @@
+import urllib.request
+import notify2
+import time
+from urllib.request import Request, urlopen
+from bs4 import BeautifulSoup
+while True:
+	notify2.init('BTC Price')
+	page='https://www.coingecko.com/en/price_charts/bitcoin/inr'
+	req = Request(page, headers={'User-Agent': 'Mozilla/5.0'})
+	coin_page=urlopen(req)
+
+	soup = BeautifulSoup(coin_page, 'html.parser')
+
+	btc=soup.find_all('tbody')
+
+	btc1=btc[2].find_all('td')
+	pageR='https://www.coingecko.com/en/price_charts/ripple/inr'
+	reqR = Request(pageR, headers={'User-Agent': 'Mozilla/5.0'})
+	coin_pageR=urlopen(reqR)
+
+	soupR = BeautifulSoup(coin_pageR, 'html.parser')
+
+	xrp=soup.find_all('tbody')
+
+	xrp1=xrp[2].find_all('td')
+
+
+
+
+
+     
+
+
+#print(btc1[3].text)
+#print(btc1[5].text)
+	if(float(btc1[3].text)>float(btc1[5].text)):
+		a=((float(btc1[3].text)-float(btc1[5].text))/float(btc1[3].text))*100
+		a=round(a,2)
+		t="Rise of "+'\n'+str(a)+"%"
+		n = notify2.Notification('Percentage Change in BTC Price', t,icon='/media/himanshu/New Volume/project/webscarpe/btcimg(1).png')
+
+
+	elif(float(btc1[3].text)<=float(btc1[5].text)):
+		a=((float(btc1[5].text)-float(btc1[3].text))/float(btc1[5].text))*100
+		a=round(a,2)
+		t="Fall of "+str(a)+"%"
+		n = notify2.Notification('Percentage Change in BTC Price', t,icon='/media/himanshu/New Volume/project/webscarpe/btcimg(1).png')
+	n.show()
+
+	time.sleep(4)
+	n.close()
+	notify2.init('xrp Price')
+	if(float(xrp1[3].text)>float(xrp1[5].text)):
+		a1=((float(xrp1[3].text)-float(xrp1[5].text))/float(xrp1[3].text))*100
+		a1=round(a1,2)
+		t1="Rise of "+str(a1)+"%"
+		n1 = notify2.Notification('Percentage Change in XRP Price', t1,icon='/media/himanshu/New Volume/project/webscarpe/btcimg(1).png')
+
+
+	elif(float(xrp1[3].text)<=float(xrp1[5].text)):
+		a1=((float(xrp1[5].text)-float(xrp1[3].text))/float(xrp1[5].text))*100
+		a1=round(a,2)
+		t1="Fall of "+str(a1)+"%"
+		n1 = notify2.Notification('Percentage Change in XRP Price', t1,icon='/media/himanshu/New Volume/project/webscarpe/btcimg(1).png')
+	n1.show()
+
+
+	time.sleep(4)
+	n1.close()
+	time.sleep(60)
+
+
+
+
+
+
+
+
+	   
+
+
+
+
+
+
+
+#n = notify2.Notification('foo00', btc1[3].text,btc1[5].text)
+
