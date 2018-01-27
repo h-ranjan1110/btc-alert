@@ -7,13 +7,13 @@ Installation.
 
 Requirement :
 Python(3+)
-BeautifulSoup--
+BeautifulSoup-->
                pip3 install beautifulsoup4
 
-notify2--
+notify2-->
         sudo apt-get install python-notify2
         
-If You Don't have pip3--
+If You Don't have pip3-->
               sudo apt-get update
               sudo apt-get install python3-pip
 
